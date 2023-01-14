@@ -28,6 +28,7 @@ public class Utils {
     
     public static boolean account_settings_menu_flag;
     public static boolean main_menu_flag = true;
+    public static boolean printLoading = true;
     
     
     static {
@@ -156,13 +157,13 @@ public class Utils {
     }
     
     public static void donwload(){
-        sleeping(1000);
-        System.out.println("Just a moment we are creating account for you!");
-        for (int i = 0; i <= 100; i++)
-        {
-            System.out.println("Loading: " + i + "%");
-            sleeping(50);
-        }
+            sleeping(1000);
+            System.out.println("Just a moment we are creating account for you!");
+            for (int i = 0; i <= 100; i++)
+            {
+                System.out.println("Loading: " + i + "%");
+                sleeping(50);
+            }
         System.out.println("");
     }
     
