@@ -65,7 +65,7 @@ public class Utils {
         account_settings_panel = new HashMap<Integer, String>();
         account_settings_panel.put(1, "Owner data");
         account_settings_panel.put(2, "Change data");
-        account_settings_panel.put(3, "Freeze/Unfreeze account");
+        account_settings_panel.put(3, "Freeze account");
         account_settings_panel.put(4, "Go back");
     }
     
@@ -163,6 +163,7 @@ public class Utils {
             {
                 System.out.println("Loading: " + i + "%");
                 sleeping(50);
+                System.out.print("\b\b\b\b\b\b\b\b\b");
             }
         System.out.println("");
     }
@@ -251,6 +252,11 @@ public class Utils {
                 System.out.println("");
                 sleeping(2000);
             }
+            case 3 -> {
+                System.out.println("You have froozed account in our system.");
+                sleeping(1000);
+                System.out.println("For unfroze your account try to Log in");
+            }
         }
     }
     
@@ -286,6 +292,11 @@ public class Utils {
                 sleeping(1000);
                 System.out.println("It will be availabe soon. \nI hope you're not upset ^_^");
             }
+            case 4 -> {
+                System.out.println("You have froozed account in our system.");
+                sleeping(1000);
+                System.out.println("For unfroze your account try to Log in");
+            }
         }
     }
     
@@ -297,6 +308,11 @@ public class Utils {
                 sleeping(2000);
                 System.out.println("Sorry but you can't donwload your data in txt format. \nWhile you are not still create at least one account in our system.");
                 sleeping(2000);
+            }
+            case 2 -> {
+                System.out.println("You have froozed account in our system.");
+                sleeping(1000);
+                System.out.println("For unfroze your account try to Log in");
             }
         }
     }

@@ -15,7 +15,11 @@ import java.util.regex.Matcher;
  * @author gasimovv21
  */
 public class CustomersRepository extends MainRepository {
-    public ArrayList customer_data = new ArrayList<>();
+
+    /**
+     *
+     */
+    public static ArrayList customer_data = new ArrayList<>();
     public ArrayList data_dump_freeze = new ArrayList<>();
 
     @Override
@@ -151,6 +155,7 @@ public class CustomersRepository extends MainRepository {
         {
             if(userPassword.equals(userUsername)){
                 System.out.println("Your password can't be equall with your username.");
+                Utils.sleeping(2000);
             }
             
             if(! matcher.matches()){
@@ -344,23 +349,53 @@ public class CustomersRepository extends MainRepository {
                 case 7 -> {
                     System.out.println("Your current password: " + customer_data.get(7));
                     
+                    System.out.print("Before change your current password. Please, enter your current password: ");
+                    String current_password = sc_data.nextLine();
+                    
+                    while(!current_password.equals(customer_data.get(7))){
+                        System.out.println("Wrong current password!");
+                        System.out.println("");
+                        System.out.print("Please, enter your current password: ");
+                        current_password = sc_data.nextLine();
+                    }
+                    
+                    System.out.println("");
                     System.out.print("Enter your new password: ");
-                    String new_userPassword = sc_data.nextLine();
+                    String new_userPassword1 = sc_data.nextLine();
+                    
+                    while(new_userPassword1.equals(customer_data.get(7))){
+                        System.out.println("The password which you entered, it's almost your current password!");
+                        System.out.println("");
+                        System.out.print("Enter your new password: ");
+                        new_userPassword1 = sc_data.nextLine();
+                    }
+                    
+                    System.out.println("");
+                    System.out.print("Enter your new password one more time: ");
+                    String new_userPassword2 = sc_data.nextLine();
+                    
+                    while(!new_userPassword1.equals(new_userPassword2)){
+                        System.out.println("The new passwords don't match!");
+                        System.out.println("");
+                        System.out.print("Enter your new password one more time: ");
+                        new_userPassword2 = sc_data.nextLine();
+                    }
         
-                    Matcher matcher =  Utils.patterns.get("PasswordPattern").matcher(new_userPassword);
-                    while(new_userPassword.equals(customer_data.get(6)) || ! matcher.matches()){
-                        if(new_userPassword.equals(customer_data.get(6))){
+                    Matcher matcher =  Utils.patterns.get("PasswordPattern").matcher(new_userPassword1);
+                    while(new_userPassword1.equals(customer_data.get(6)) || ! matcher.matches()){
+                        if(new_userPassword1.equals(customer_data.get(6))){
                             System.out.println("Your password can't be equall with your username.");
                         }
+                        Utils.sleeping(2000);
                         if(! matcher.matches()){
                             System.out.println("Password must contain: \n· 8-16 characters \n· one uppercase \n· one lowercase \n· one digit \n· one special character: space, !, @, #, $ and etc. \n Please try again.");
                         }
                         System.out.println("");
                         System.out.print("Enter your new password: ");
-                        new_userPassword = sc_data.nextLine();
-                        matcher = Utils.patterns.get("PasswordPattern").matcher(new_userPassword);
+                        new_userPassword1 = sc_data.nextLine();
+                        matcher = Utils.patterns.get("PasswordPattern").matcher(new_userPassword1);
                     }
-                    customer_data.set(7, new_userPassword);
+                    customer_data.set(7, new_userPassword1);
                     Utils.sleeping(1500);
                     System.out.println("Your new password: " + customer_data.get(7));
                 }
