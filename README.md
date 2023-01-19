@@ -67,4 +67,4 @@ This program is for educational purposes only and should not be used for real fi
 
 # 🎓 Project by Eltun Gasimov 
 ## University of economics and human science in Warsaw
-![University of economics and human science in Warsaw](https://vizja.pl/en/wp-content/themes/divi-child/images/Logo_Akademia_poziom_2.png)
+[University of economics and human science in Warsaw](https://vizja.pl/en/wp-content/themes/divi-child/images/Logo_Akademia_poziom_2.png)
