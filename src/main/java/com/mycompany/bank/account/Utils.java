@@ -1,5 +1,6 @@
 package com.mycompany.bank.account;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -159,6 +160,7 @@ public class Utils {
     public static void donwload(){
             sleeping(1000);
             System.out.println("Just a moment we are creating account for you!");
+            sleeping(1500);
             for (int i = 0; i <= 100; i++)
             {
                 System.out.println("Loading: " + i + "%");
@@ -225,12 +227,13 @@ public class Utils {
         sleeping(1500);
         System.out.println("Just be patiently.");
         sleeping(2000);
-        System.out.println("I hope you are still here ^_^");
+        System.out.println("I hope you're still here ^_^");
         sleeping(2000);
         System.out.println("");
     }
     
     public static void login_message() {
+        sleeping(1500);
         System.out.println("""
             Sorry but you can't Log in,
             while you are not registered in our system!""");
@@ -253,6 +256,7 @@ public class Utils {
                 sleeping(2000);
             }
             case 3 -> {
+                sleeping(1000);
                 System.out.println("You have froozed account in our system.");
                 sleeping(1000);
                 System.out.println("For unfroze your account try to Log in");
@@ -266,36 +270,42 @@ public class Utils {
             case 1 -> {
                 sleeping(2000);
                 System.out.println("");
-                System.out.println("File is not found!");
                 sleeping(1000);
                 System.out.println("""
-                    Before start upload your data. 
+                    Before start to upload your data. 
                     Please be sure that all of the following points are met: 
-                        · name of file - customer_info 
+                        · name of file - customer_data 
                         · format - .txt
                         · file location - src/main/java/com/mycompany/bank/account/customer_data.txt""");
-                sleeping(8000);
+                sleeping(1500);
+                System.out.println("""
+                                   The correct file structure:
+                                   1 line ID
+                                   2 line Name
+                                   3 line Surname
+                                   4 line Gender
+                                   5 line Age
+                                   6 line Address
+                                   7 line Username
+                                   8 line Password""");
             }   
             case 2 -> {
-                System.out.println("");
-                sleeping(1500);
-                System.out.println("The data in Customer_info.txt file dose not correct, please correct your data in file!");
-                sleeping(1500);
-                System.out.print("You are logged out!");
-                sleeping(1500);
-                System.out.println("");
-                sleeping(1500);
-                System.out.println("We will be waiting for you again. \nGood luck!");
-            }
-            case 3 -> {
+                sleeping(1000);
                 System.out.println("Sorry but load more than 1 account data, in our system fow now is not available.");
                 sleeping(1000);
                 System.out.println("It will be availabe soon. \nI hope you're not upset ^_^");
             }
-            case 4 -> {
+            case 3 -> {
+                sleeping(1000);
                 System.out.println("You have froozed account in our system.");
                 sleeping(1000);
                 System.out.println("For unfroze your account try to Log in");
+            }
+            case 4 -> {
+                System.out.println("");
+                sleeping(1500);
+                System.out.println("The data in customer_data.txt file dose not correct, please correct your data in file!");
+                sleeping(1500);
             }
         }
     }

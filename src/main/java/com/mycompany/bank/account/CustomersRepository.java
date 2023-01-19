@@ -230,7 +230,7 @@ public class CustomersRepository extends MainRepository {
                     //Testing variable
 
                     while(! matcher.matches()){
-                        System.out.println("First name can't contain the: \n· numbers \n· spaces \n· symbols. \n Please try again.");
+                        System.out.println("First name can't contain the: \n· numbers \n· spaces \n· symbols \n Please try again.");
                         System.out.println("");
                         System.out.print("Please enter the new first name: ");
                         new_userFirstName = sc_data.nextLine();
@@ -251,7 +251,7 @@ public class CustomersRepository extends MainRepository {
                     //Testing variable
 
                     while(! matcher.matches()){
-                        System.out.println("Last name can't contain the: \n· numbers \n· spaces \n· symbols. \n Please try again.");
+                        System.out.println("Last name can't contain the: \n· numbers \n· spaces \n· symbols \n Please try again.");
                         System.out.println("");
                         System.out.print("Please enter the new last name: ");
                         new_userLastName = sc_data.nextLine();

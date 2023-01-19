@@ -30,6 +30,7 @@ public class BankAccount {
         Scanner selected_method_main_menu = new Scanner(System.in);
         boolean account_menu_flag = false;
         int balance = 1500, withdraw, deposit;
+        int cash = 800;
 
         System.out.println("\\----------------------------< Welcome to EG Bank >--------------------------------/");
         while(Utils.main_menu_flag){
@@ -97,13 +98,16 @@ public class BankAccount {
                                                     
                                                     if(balance >= withdraw){
                                                         balance = balance - withdraw;
-                                                        System.out.println("Your balance: " + balance + "€");
+                                                        System.out.println("Your account balance: " + balance + "€");
                                                         Utils.sleeping(1000);
                                                         System.out.println("You can collect your money: " + withdraw + " €");
+                                                        Utils.sleeping(1000);
+                                                        cash = cash + withdraw;
+                                                        System.out.println("Your cash: " + cash + " €");
                                                     }
                                                     else {
                                                         Utils.sleeping(1000);
-                                                        System.out.println("Insufficient Balance");
+                                                        System.out.println("Insufficient balance");
                                                         System.out.println("");
                                                         break;
                                                     }   
@@ -114,7 +118,7 @@ public class BankAccount {
                                                     Utils.sleeping(1000);
                                                     Scanner sc_deposit = new Scanner(System.in);
                                                     System.out.print("Enter money to be deposited: ");
-                                                    sc_deposit.nextLine();
+                                                    sc_deposit.hasNextLine();
                                                     
                                                     while(! sc_deposit.hasNextInt()){
                                                         Utils.sleeping(1500);
@@ -126,16 +130,27 @@ public class BankAccount {
                                                     }
                                                     
                                                     deposit = sc_deposit.nextInt();
-                                                    balance = balance + deposit;
-                                                    System.out.println("Your balance: " + balance + " €");
-                                                    Utils.sleeping(1000);
-                                                    System.out.println("Your money has been successfully deposited");
-                                                    break;
+                                                    if(cash >= deposit){
+                                                        balance = balance + deposit;
+                                                        System.out.println("Your account balance: " + balance + " €");
+                                                        cash = cash - deposit;
+                                                        System.out.println("Your cash: " + cash + " €");
+                                                        Utils.sleeping(1000);
+                                                        System.out.println("Your money has been successfully deposited");
+                                                    } else {
+                                                        Utils.sleeping(1000);
+                                                        System.out.println("Insufficient cash");
+                                                        System.out.println("");
+                                                        break;
+                                                    }
+                                                     
                                                 }
                                                 case 3 -> {
                                                     // Balance Button - Account menu
                                                     Utils.sleeping(1000);
-                                                    System.out.println("Your balance: " + balance + " €");
+                                                    System.out.println("Your account balance: " + balance + " €");
+                                                    Utils.sleeping(1000);
+                                                    System.out.println("Your cash: " + cash + " €");
                                                 }
                                                 case 4 -> {
                                                     // Account settings button - Account menu
@@ -190,7 +205,7 @@ public class BankAccount {
                                                             default -> {
                                                                 // Default method - Account Settings
                                                                 Utils.sleeping(1500);
-                                                                System.out.print("Not available method!\n");
+                                                                System.out.print("Not available operation!\n");
                                                             }
                                                         }
                                                     }
@@ -204,7 +219,7 @@ public class BankAccount {
                                                 default -> {
                                                     // Default method - Account menu
                                                     Utils.sleeping(1500);
-                                                    System.out.print("Not available method!\n");
+                                                    System.out.print("Not available operation!\n");
                                                 }
                                             }
                                         }
@@ -269,12 +284,15 @@ public class BankAccount {
                         
                             File file = new File("src/main/java/com/mycompany/bank/account/customer_data.txt");
                             if (! file.exists()) {
+                                System.out.println("File is not found!");
                                 Utils.load_data_message(1);
                                 Utils.redirect_to_menu();
                             } else {
                                 Utils.sleeping(2000);
                                 System.out.println("File is found!");
+
                                 Scanner scanner = null;
+                                
                                 try {
                                     scanner = new Scanner(file);
                                 } catch (FileNotFoundException e) {
@@ -286,6 +304,11 @@ public class BankAccount {
                                 while (scanner.hasNextLine()) {
                                     cr.customer_data.add(i, scanner.nextLine());
                                     i++;
+                                }
+                                if (cr.customer_data.size() > 8){
+                                    System.out.println("Not correct structure of the file - the file length is more than 8.");
+                                    Utils.load_data_message(1);
+                                    System.exit(0);
                                 }
 
                                 // Closing file and show
@@ -327,15 +350,62 @@ public class BankAccount {
                                     }
                                     System.out.println("");
                                 }else {
-                                    Utils.load_data_message(2);
-                                    Utils.main_menu_flag = false;
+                                    ArrayList<String> load_data_mistakes = new ArrayList<String>();
+                                    if (!first_name.matches()){
+                                        load_data_mistakes.add("First name");
+                                        System.out.println("First name can't contain the: \n· numbers \n· spaces \n· symbols.");
+                                        System.out.println("");
+                                    }   
+                                    if (!last_name.matches()){
+                                        load_data_mistakes.add("Last name");
+                                        System.out.println("Last name can't contain the: \n· numbers \n· spaces \n· symbols.");
+                                        Utils.sleeping(500);
+                                        System.out.println("");
+                                    }
+                                    if (!gender_flag){
+                                        load_data_mistakes.add("Gender");
+                                        System.out.println("Are you sure that you are correctly write your gender? \n Enter your gender with a capital letter.");
+                                        Utils.sleeping(500);
+                                        System.out.println("");
+                                    }
+                                    if (!age.matches()){
+                                        load_data_mistakes.add("Age");
+                                        System.out.println("Customer must be 18 or older. \nAge can't contain the: \n· letters \n· spaces \n· symbols.");
+                                        Utils.sleeping(500);
+                                        System.out.println("");
+                                    }
+                                    if (!address.matches()){
+                                        load_data_mistakes.add("Address");
+                                        System.out.println("Address can't contain the: \n· symbols \n Please try again.");
+                                        Utils.sleeping(500);
+                                        System.out.println("");
+                                    }
+                                    if (!login_mtch.matches()){
+                                        load_data_mistakes.add("Login");
+                                        System.out.println("Username must contain: \n· letters and numbers only \n· 8-20 characters \n· Minimum 8 letters.");
+                                        Utils.sleeping(500);
+                                        System.out.println("");
+                                    }
+                                    if (!password_mtch.matches()){
+                                        load_data_mistakes.add("Password");
+                                        System.out.println("Password must contain: \n· 8-16 characters \n· one uppercase \n· one lowercase \n· one digit \n· one special character: space, !, @, #, $ and etc \n· Can't be equal with username");
+                                        Utils.sleeping(500);
+                                        System.out.println("");
+                                    }
+                                    if (!load_data_mistakes.isEmpty()){
+                                        Utils.load_data_message(4);
+                                        System.out.println("Problem dates: " + load_data_mistakes);
+                                        Utils.sleeping(1500);
+                                        Utils.quit_message();
+                                        Utils.main_menu_flag = false;
+                                    }
                                 }
                             }
                         } else {
-                            Utils.load_data_message(3);
+                            Utils.load_data_message(2);
                         }
                     } else {
-                        Utils.load_data_message(4);
+                        Utils.load_data_message(3);
                     }
                 }
                 case 4 -> {
@@ -392,7 +462,7 @@ public class BankAccount {
                 default -> {
                     // Default method - EG Bank menu
                     Utils.sleeping(1500);
-                    System.out.print("Not available method!\n");
+                    System.out.print("Not available operation!\n");
                 }
             }
         }
