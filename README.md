@@ -1,13 +1,23 @@
-# Bank-Account-Project
-This project is a simple Java program that simulates a bank account. It includes classes for creating and managing a bank account, including methods for depositing and withdrawing funds, checking the account balance, and displaying account information.
+#💰 Bank Account 🏦
+This is a simple program that simulates a bank account 💳. The user can deposit 💰, withdraw 💸, and check their balance 💴.
 
+🚀 Getting Started
+To get started, clone or download the repository and run the main.py file 💾. You will be prompted to enter your initial deposit 💰.
 
-Main moment: You need to create txt file with name "customer_data" and after add one by one in line all informations
+📖 Usage
+The program has three main commands:
 
-Name
-Surname
-Gender
-Age
-Address
-Username
-Password
+deposit (amount) 💰: allows the user to deposit money into their account
+withdraw (amount) 💸: allows the user to withdraw money from their account
+check 💴: displays the current balance of the account
+📚 Example
+Copy code
+Enter Initial deposit: 1000
+> deposit 500
+> check
+Current balance: 1500
+> withdraw 200
+> check
+Current balance: 1300
+⚠️ Note
+This program is for educational purposes only and should not be used for real financial transactions. 💳💰💸💴
