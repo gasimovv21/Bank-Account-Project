@@ -21,6 +21,8 @@ public class Utils {
 
     public static Map<Integer, String> account_settings_panel;
     
+    public static Map<Integer, String> account_type;
+    
     public static Map<Integer, String> change_data_panel;
     
     public static Map<String, Pattern> patterns;
@@ -82,6 +84,14 @@ public class Utils {
         change_data_panel.put(8, "Go back");
     }
     
+    static {
+        account_type = new HashMap<Integer, String>();
+        account_type.put(1, "Normal bank account");
+        account_type.put(2, "Student bank account");
+        account_type.put(3, "Elderly bank account");
+        
+    }
+    
     
     
     static {
@@ -141,6 +151,15 @@ public class Utils {
     
     public static String getChangeDataPanel(Integer segment){
         for (Map.Entry<Integer, String> entry: change_data_panel.entrySet()){
+            if(segment.equals(entry.getKey())){
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
+    
+    public static String getAccountType(Integer segment){
+        for (Map.Entry<Integer, String> entry : account_type.entrySet()){
             if(segment.equals(entry.getKey())){
                 return entry.getValue();
             }
@@ -218,6 +237,16 @@ public class Utils {
             + "\n7 => " + Utils.getChangeDataPanel(7)
             + "\n8 => " + Utils.getChangeDataPanel(8)        
             + "\n Choose the data which you want to change: ");
+    }
+    
+    public static void account_type_choose(){
+        sleeping(1500);
+        System.out.print(
+            " \\--------------------------------[ Account Type ]----------------------------------/"
+            + "\n1 => " + Utils.getAccountType(1)
+            + "\n2 => " + Utils.getAccountType(2)
+            + "\n3 => " + Utils.getAccountType(3)
+            + "\n Choose the operation which account type you want to choose: ");
     }
     
     
@@ -323,6 +352,35 @@ public class Utils {
                 System.out.println("You have froozed account in our system.");
                 sleeping(1000);
                 System.out.println("For unfroze your account try to Log in");
+            }
+        }
+    }
+    
+    public static void account_type_message(int message_type){
+        switch(message_type){
+            case 1 -> {
+                System.out.println("");
+                sleeping(1000);
+                System.out.println("""
+                                   The type of owners of a Normal bank account:
+                                   A bonus of 500 euros from our bank to your new account.
+                                   3% Commission percentage of the amount of each deposit and  withdrawal.""");
+            }
+            case 2 -> {
+                System.out.println("");
+                sleeping(1000);
+                System.out.println("""
+                                   The type of owners of a Stunder bank account:
+                                   A bonus of 850 euros from our bank to your new account.
+                                   2% Commission percentage of the amount of each deposit and  withdrawal.""");
+            }
+            case 3 -> {
+                System.out.println("");
+                sleeping(1000);
+                System.out.println("""
+                                   The type of owners of a Elderly bank account:
+                                   A bonus of 1500 euros from our bank to your new account.
+                                   1% Commission percentage of the amount of each deposit and  withdrawal.""");
             }
         }
     }

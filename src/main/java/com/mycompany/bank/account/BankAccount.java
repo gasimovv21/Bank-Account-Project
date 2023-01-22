@@ -22,15 +22,19 @@ import java.util.logging.Logger;
  * @author gasimovv21
  */
 
-public class BankAccount {
+public abstract class BankAccount {
+
+    public abstract void NormalAccount();
+    
+    public abstract void StudentAccount();
+    
+    public abstract void ForOlderPeaopleAccount();
 
     public static void main(String[] args)
     {
         CustomersRepository cr = new CustomersRepository();
         Scanner selected_method_main_menu = new Scanner(System.in);
         boolean account_menu_flag = false;
-        int balance = 1500, withdraw, deposit;
-        int cash = 800;
 
         System.out.println("\\----------------------------< Welcome to EG Bank >--------------------------------/");
         while(Utils.main_menu_flag){
@@ -94,16 +98,16 @@ public class BankAccount {
                                                         sc_withdraw.nextLine();
                                                     }
                                                     
-                                                    withdraw = sc_withdraw.nextInt();
+                                                    AccountType.withdraw = sc_withdraw.nextInt();
                                                     
-                                                    if(balance >= withdraw){
-                                                        balance = balance - withdraw;
-                                                        System.out.println("Your account balance: " + balance + "€");
+                                                    if(AccountType.balance >= AccountType.withdraw){
+                                                        AccountType.balance = AccountType.balance - AccountType.withdraw;
+                                                        System.out.println("Your account balance: " + AccountType.balance + "€");
                                                         Utils.sleeping(1000);
-                                                        System.out.println("You can collect your money: " + withdraw + " €");
+                                                        System.out.println("You can collect your money: " + AccountType.withdraw + " €");
                                                         Utils.sleeping(1000);
-                                                        cash = cash + withdraw;
-                                                        System.out.println("Your cash: " + cash + " €");
+                                                        AccountType.cash = AccountType.cash + AccountType.withdraw;
+                                                        System.out.println("Your cash: " + AccountType.cash + " €");
                                                     }
                                                     else {
                                                         Utils.sleeping(1000);
@@ -129,12 +133,12 @@ public class BankAccount {
                                                         sc_deposit.nextLine();
                                                     }
                                                     
-                                                    deposit = sc_deposit.nextInt();
-                                                    if(cash >= deposit){
-                                                        balance = balance + deposit;
-                                                        System.out.println("Your account balance: " + balance + " €");
-                                                        cash = cash - deposit;
-                                                        System.out.println("Your cash: " + cash + " €");
+                                                    AccountType.deposit = sc_deposit.nextInt();
+                                                    if(AccountType.cash >= AccountType.deposit){
+                                                        AccountType.balance = AccountType.balance + AccountType.deposit;
+                                                        System.out.println("Your account balance: " + AccountType.balance + " €");
+                                                        AccountType.cash = AccountType.cash - AccountType.deposit;
+                                                        System.out.println("Your cash: " + AccountType.cash + " €");
                                                         Utils.sleeping(1000);
                                                         System.out.println("Your money has been successfully deposited");
                                                     } else {
@@ -148,9 +152,9 @@ public class BankAccount {
                                                 case 3 -> {
                                                     // Balance Button - Account menu
                                                     Utils.sleeping(1000);
-                                                    System.out.println("Your account balance: " + balance + " €");
+                                                    System.out.println("Your account balance: " + AccountType.balance + " €");
                                                     Utils.sleeping(1000);
-                                                    System.out.println("Your cash: " + cash + " €");
+                                                    System.out.println("Your cash: " + AccountType.cash + " €");
                                                 }
                                                 case 4 -> {
                                                     // Account settings button - Account menu
@@ -214,7 +218,7 @@ public class BankAccount {
                                                     // Go back button - Account menu
                                                     account_menu_flag = false;
                                                     Utils.main_menu_flag = true;
-                                                    System.out.println("You are going back to EQ Bank Menu...");
+                                                    System.out.println("You are going back to EG Bank Menu...");
                                                 }
                                                 default -> {
                                                     // Default method - Account menu

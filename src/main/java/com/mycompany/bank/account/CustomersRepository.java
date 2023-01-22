@@ -33,6 +33,22 @@ public class CustomersRepository extends MainRepository {
         // Scanner tool
         
         Scanner sc = new Scanner(System.in);
+        
+        // Account type selection place
+        System.out.print("Before create account please read accoun types wich availabe for you to choose.");
+        System.out.println("");
+        Utils.sleeping(1000);
+        Utils.account_type_message(1);
+        Utils.sleeping(1000);
+        Utils.account_type_message(2);
+        Utils.sleeping(1000);
+        Utils.account_type_message(3);
+        Utils.sleeping(1000);
+        
+        System.out.println("");
+        Utils.account_type_choose();
+        String accountType = sc.nextLine();
+        
         System.out.println("");
         System.out.print("Enter your first name: ");
         String userFirstName = sc.nextLine();
