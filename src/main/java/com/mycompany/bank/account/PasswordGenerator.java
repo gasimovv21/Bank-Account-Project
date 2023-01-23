@@ -53,7 +53,7 @@ public class PasswordGenerator {
         }
         Matcher matcher = PASSWORD_PATTERN.matcher(password);
         if(matcher.matches()) {
-            cr.customer_data.set(7, password.toString());
+            cr.customer_data.set(8, password.toString());
             System.out.println("Your new password: " + password.toString());
             Utils.sleeping(1500);
             System.out.println("You can Log in with this password. \nAfter change password in Account settings -> Change data -> Password.");

@@ -21,6 +21,7 @@ public class CustomersRepository extends MainRepository {
      */
     public static ArrayList customer_data = new ArrayList<>();
     public ArrayList data_dump_freeze = new ArrayList<>();
+    AccountType account = new AccountType();
 
     @Override
     public void create() {
@@ -35,8 +36,7 @@ public class CustomersRepository extends MainRepository {
         Scanner sc = new Scanner(System.in);
         
         // Account type selection place
-        System.out.print("Before create account please read accoun types wich availabe for you to choose.");
-        System.out.println("");
+        Utils.account_type_message(4);
         Utils.sleeping(1000);
         Utils.account_type_message(1);
         Utils.sleeping(1000);
@@ -45,9 +45,36 @@ public class CustomersRepository extends MainRepository {
         Utils.account_type_message(3);
         Utils.sleeping(1000);
         
-        System.out.println("");
-        Utils.account_type_choose();
-        String accountType = sc.nextLine();
+        while(Utils.accountType_flag){
+            Utils.account_type_choose();
+            while (! sc.hasNextInt()) {
+                Utils.sleeping(1500);
+                System.out.println("Enter only numbers!");
+                Utils.account_type_choose();
+                sc.nextLine();
+            }
+            account.accounType_menu_choose = sc.nextInt();
+            switch (account.accounType_menu_choose) {
+                case 1 -> {
+                    AccountType.accountType_choice = "Normal";
+                    Utils.accountType_flag = false;
+                }
+                case 2 -> {
+                    AccountType.accountType_choice = "Student";
+                    Utils.accountType_flag = false;
+                }
+                case 3 -> {
+                    AccountType.accountType_choice = "Elderly";
+                    Utils.accountType_flag = false;
+                }
+                default -> {
+                    System.out.println("You can enter only numbers from 1 to 3!");
+                    Utils.sleeping(1500);
+                }
+            }
+        }
+
+        //Valid input
         
         System.out.println("");
         System.out.print("Enter your first name: ");
@@ -107,6 +134,14 @@ public class CustomersRepository extends MainRepository {
         
         
         // Testing variable
+        
+        while(AccountType.accountType_choice.equals("Elderly") && Integer.parseInt(userAge) < 60){
+            System.out.println("User can create Elderly type of bank account only when age more or equal to 60.");
+            System.out.println("");
+            System.out.print("Enter your age: ");
+            userAge = sc.nextLine();
+            matcher =  Utils.patterns.get("AgePattern").matcher(userAge);
+        }
 
         while(! matcher.matches()){
             System.out.println("Customer must be 18 or older. \nAge can't contain the: \n· letters \n· spaces \n· symbols \n Please try again.");
@@ -162,7 +197,7 @@ public class CustomersRepository extends MainRepository {
         // Account Password
         
         System.out.println("");
-        System.out.println(" Password must contain: \n· 8-16 characters \n· one uppercase \n· one lowercase \n· one special character: space, !, @, #, $ and etc. \n· one special character.");
+        System.out.println(" Password must contain: \n· 8-16 characters \n· one uppercase \n· one lowercase \n· one special character: space, !, @, #, $ and etc.");
         System.out.print("Enter password: ");
         String userPassword = sc.nextLine();
         
@@ -188,6 +223,7 @@ public class CustomersRepository extends MainRepository {
 
         Customers customer = new Customers(
                 id,
+                AccountType.accountType_choice,
                 userFirstName,
                 userLastName,
                 userGender,
@@ -198,6 +234,7 @@ public class CustomersRepository extends MainRepository {
         
         
             customer_data.add(customer.personalId);
+            customer_data.add(AccountType.accountType_choice);
             customer_data.add(customer.firstName);
             customer_data.add(customer.lastName);
             customer_data.add(customer.gender);
@@ -206,9 +243,14 @@ public class CustomersRepository extends MainRepository {
             customer_data.add(customer.username);
             customer_data.add(customer.password);
             
+            
+            Utils.sleeping(1500);
+            System.out.println("Just a moment we are creating account for you!");
             Utils.donwload();
+            Utils.sleeping(1500);
             System.out.println("You are succsesfully registered in our system!");
             int j = 0;
+            Utils.sleeping(1500);
             System.out.println("Your data: ");
             while (j != customer_data.size()){
                 System.out.println(
@@ -237,7 +279,7 @@ public class CustomersRepository extends MainRepository {
             Scanner sc_data = new Scanner(System.in);
             switch(change_data_console){
                 case 1 -> {
-                    System.out.println("Your current first name: " + customer_data.get(1));
+                    System.out.println("Your current first name: " + customer_data.get(2));
                     Utils.sleeping(1500);
                     System.out.print("Please enter the new first name: ");
                     String new_userFirstName = sc_data.nextLine();
@@ -253,12 +295,12 @@ public class CustomersRepository extends MainRepository {
                         matcher =  Utils.patterns.get("NamePattern").matcher(new_userFirstName);
                     }
                     
-                    customer_data.set(1, new_userFirstName);
+                    customer_data.set(2, new_userFirstName);
                     Utils.sleeping(1500);
-                    System.out.println("Your new first name: " + customer_data.get(1));
+                    System.out.println("Your new first name: " + customer_data.get(2));
                 }
                 case 2 -> {
-                    System.out.println("Your current last name: " + customer_data.get(2));
+                    System.out.println("Your current last name: " + customer_data.get(3));
                     Utils.sleeping(1500);
                     System.out.print("Please enter the new last name: ");
                     String new_userLastName = sc_data.nextLine();
@@ -274,12 +316,12 @@ public class CustomersRepository extends MainRepository {
                         matcher =  Utils.patterns.get("NamePattern").matcher(new_userLastName);
                     }
                     
-                    customer_data.set(2, new_userLastName);
+                    customer_data.set(3, new_userLastName);
                     Utils.sleeping(1500);
-                    System.out.println("Your new last name: " + customer_data.get(2));        
+                    System.out.println("Your new last name: " + customer_data.get(3));        
                 }
                 case 3 -> {
-                    System.out.println("Your current gender: " + customer_data.get(3));
+                    System.out.println("Your current gender: " + customer_data.get(4));
                     System.out.print("Enter your new gender - Male or Female: ");
                     String new_userGender = sc_data.nextLine();
         
@@ -292,15 +334,31 @@ public class CustomersRepository extends MainRepository {
                         new_userGender = sc_data.nextLine();
                     }
                     
-                    customer_data.set(3, new_userGender);
+                    customer_data.set(4, new_userGender);
                     Utils.sleeping(1500);
-                    System.out.println("Your new gender: " + customer_data.get(3));
+                    System.out.println("Your new gender: " + customer_data.get(4));
                 }
                 case 4 -> {
-                    System.out.println("Your current age: " + customer_data.get(4));
+                    System.out.println("Your current age: " + customer_data.get(5));
                     System.out.print("Enter your new age: ");
                     String new_userAge = sc_data.nextLine();
                     Matcher matcher = Utils.patterns.get("AgePattern").matcher(new_userAge);
+                    
+                    while(customer_data.get(1).equals("Elderly") && Integer.parseInt(new_userAge) < 60){
+                        System.out.println("Elderly type of bank account available only when age more or equal to 60.");
+                        System.out.println("");
+                        System.out.print("Enter your new age: ");
+                        new_userAge = sc_data.nextLine();
+                        matcher =  Utils.patterns.get("AgePattern").matcher(new_userAge);
+                        
+                        while(! matcher.matches()){
+                            System.out.println("Customer must be 18 or older. \nAge can't contain the: \n· letters \n· spaces \n· symbols \n Please try again.");
+                            System.out.println("");
+                            System.out.print("Enter your new age: ");
+                            new_userAge = sc_data.nextLine();
+                            matcher =  Utils.patterns.get("AgePattern").matcher(new_userAge);
+                    }
+        }
         
         
                     // Testing variable
@@ -313,12 +371,12 @@ public class CustomersRepository extends MainRepository {
                         matcher =  Utils.patterns.get("AgePattern").matcher(new_userAge);
                     }
                     
-                    customer_data.set(4, new_userAge);
+                    customer_data.set(5, new_userAge);
                     Utils.sleeping(1500);
-                    System.out.println("Your new age: " + customer_data.get(4));
+                    System.out.println("Your new age: " + customer_data.get(5));
                 }
                 case 5 -> {
-                    System.out.println("Your current address: " + customer_data.get(5));
+                    System.out.println("Your current address: " + customer_data.get(6));
                     System.out.print("Enter your new address: ");
                     String new_address = sc_data.nextLine();
         
@@ -337,12 +395,12 @@ public class CustomersRepository extends MainRepository {
             
                         new_userAddress = new Address(new_address);
                     }
-                    customer_data.set(5, new_userAddress.address);
+                    customer_data.set(6, new_userAddress.address);
                     Utils.sleeping(1500);
-                    System.out.println("Your new address: " + customer_data.get(5));
+                    System.out.println("Your new address: " + customer_data.get(6));
                 }
                 case 6 -> {
-                    System.out.println("Your current username: " + customer_data.get(6));
+                    System.out.println("Your current username: " + customer_data.get(7));
                     
                     System.out.print("Enter your new username: ");
                     String new_userUsername = sc_data.nextLine();
@@ -358,17 +416,17 @@ public class CustomersRepository extends MainRepository {
                         new_userUsername = sc_data.nextLine();
                         matcher =  Utils.patterns.get("LoginPattern").matcher(new_userUsername);
                     }
-                    customer_data.set(6, new_userUsername);
+                    customer_data.set(7, new_userUsername);
                     Utils.sleeping(1500);
-                    System.out.println("Your new username: " + customer_data.get(6));
+                    System.out.println("Your new username: " + customer_data.get(7));
                 }
                 case 7 -> {
-                    System.out.println("Your current password: " + customer_data.get(7));
+                    System.out.println("Your current password: " + customer_data.get(8));
                     
                     System.out.print("Before change your current password. Please, enter your current password: ");
                     String current_password = sc_data.nextLine();
                     
-                    while(!current_password.equals(customer_data.get(7))){
+                    while(!current_password.equals(customer_data.get(8))){
                         System.out.println("Wrong current password!");
                         System.out.println("");
                         System.out.print("Please, enter your current password: ");
@@ -379,7 +437,7 @@ public class CustomersRepository extends MainRepository {
                     System.out.print("Enter your new password: ");
                     String new_userPassword1 = sc_data.nextLine();
                     
-                    while(new_userPassword1.equals(customer_data.get(7))){
+                    while(new_userPassword1.equals(customer_data.get(8))){
                         System.out.println("The password which you entered, it's almost your current password!");
                         System.out.println("");
                         System.out.print("Enter your new password: ");
@@ -398,8 +456,8 @@ public class CustomersRepository extends MainRepository {
                     }
         
                     Matcher matcher =  Utils.patterns.get("PasswordPattern").matcher(new_userPassword1);
-                    while(new_userPassword1.equals(customer_data.get(6)) || ! matcher.matches()){
-                        if(new_userPassword1.equals(customer_data.get(6))){
+                    while(new_userPassword1.equals(customer_data.get(7)) || ! matcher.matches()){
+                        if(new_userPassword1.equals(customer_data.get(7))){
                             System.out.println("Your password can't be equall with your username.");
                         }
                         Utils.sleeping(2000);
@@ -411,9 +469,9 @@ public class CustomersRepository extends MainRepository {
                         new_userPassword1 = sc_data.nextLine();
                         matcher = Utils.patterns.get("PasswordPattern").matcher(new_userPassword1);
                     }
-                    customer_data.set(7, new_userPassword1);
+                    customer_data.set(8, new_userPassword1);
                     Utils.sleeping(1500);
-                    System.out.println("Your new password: " + customer_data.get(7));
+                    System.out.println("Your new password: " + customer_data.get(8));
                 }
                 case 8 -> {
                     Utils.account_settings_menu_flag = true;
@@ -437,8 +495,11 @@ public class CustomersRepository extends MainRepository {
             Utils.sleeping(1500);
             data_dump_freeze.addAll(customer_data);
             customer_data = null;
+            System.out.println("Freezing process started!");
+            Utils.sleeping(1000);
+            Utils.donwload();
             Utils.sleeping(2000);
-            System.out.println("Your account was frozen!");
+            System.out.println("Your account was succesfully frozen!");
             Utils.main_menu_flag = true;
             Utils.account_settings_menu_flag = false;
             

@@ -10,24 +10,29 @@ package com.mycompany.bank.account;
  */
 public class AccountType extends BankAccount{
     
-    public static int balance = 1500;
-    public static int withdraw = 0;
-    public static int deposit = 0;    
-    public static int cash = 10000;
+    public int balance, withdraw, deposit; 
+    public double commission_percentage;
+    public int cash = 10000;
+    public int accounType_menu_choose;
+    public static String accountType_choice;
 
     @Override
     public void NormalAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        balance = 500;
+        commission_percentage = 0.05;
+        
     }
 
     @Override
     public void StudentAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        balance = 950;
+        commission_percentage = 0.03;
     }
 
     @Override
     public void ForOlderPeaopleAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        balance = 1500;
+        commission_percentage = 0.01;
     }
     
 }

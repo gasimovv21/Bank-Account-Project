@@ -32,6 +32,7 @@ public class Utils {
     public static boolean account_settings_menu_flag;
     public static boolean main_menu_flag = true;
     public static boolean printLoading = true;
+    public static boolean accountType_flag = true;
     
     
     static {
@@ -39,20 +40,21 @@ public class Utils {
         menu_panel.put(1, "Log in");
         menu_panel.put(2, "Registration");
         menu_panel.put(3, "Load data");
-        menu_panel.put(4, "Download your account data to txt format.");
+        menu_panel.put(4, "Download your account data in txt format.");
         menu_panel.put(5, "Quit");
     }
     
      static {
         customer_data_text = new HashMap<Integer, String>();
         customer_data_text.put(0, "Customer ID: ");
-        customer_data_text.put(1, "First name: ");
-        customer_data_text.put(2, "Last name: ");
-        customer_data_text.put(3, "Gender: ");
-        customer_data_text.put(4, "Age: ");
-        customer_data_text.put(5, "Address: ");
-        customer_data_text.put(6, "Username: ");
-        customer_data_text.put(7, "Password: ");
+        customer_data_text.put(1, "Account type: ");
+        customer_data_text.put(2, "First name: ");
+        customer_data_text.put(3, "Last name: ");
+        customer_data_text.put(4, "Gender: ");
+        customer_data_text.put(5, "Age: ");
+        customer_data_text.put(6, "Address: ");
+        customer_data_text.put(7, "Username: ");
+        customer_data_text.put(8, "Password: ");
     }
         
     static {
@@ -177,8 +179,6 @@ public class Utils {
     }
     
     public static void donwload(){
-            sleeping(1000);
-            System.out.println("Just a moment we are creating account for you!");
             sleeping(1500);
             for (int i = 0; i <= 100; i++)
             {
@@ -310,6 +310,7 @@ public class Utils {
                 System.out.println("""
                                    The correct file structure:
                                    1 line ID
+                                   2 line Account Type: Normal, Student, Elderly
                                    2 line Name
                                    3 line Surname
                                    4 line Gender
@@ -336,6 +337,12 @@ public class Utils {
                 System.out.println("The data in customer_data.txt file dose not correct, please correct your data in file!");
                 sleeping(1500);
             }
+            case 5 -> {
+                System.out.println("");
+                sleeping(1500);
+                System.out.println("Not correct structure of the file - the file length is more than 9.");
+                sleeping(1000);
+            }
         }
     }
     
@@ -361,27 +368,41 @@ public class Utils {
             case 1 -> {
                 System.out.println("");
                 sleeping(1000);
-                System.out.println("""
+                System.out.print("""
                                    The type of owners of a Normal bank account:
                                    A bonus of 500 euros from our bank to your new account.
-                                   3% Commission percentage of the amount of each deposit and  withdrawal.""");
+                                   3% Commission percentage of the amount of withdrawal.""");
+                System.out.println("");
             }
             case 2 -> {
                 System.out.println("");
                 sleeping(1000);
-                System.out.println("""
+                System.out.print("""
                                    The type of owners of a Stunder bank account:
-                                   A bonus of 850 euros from our bank to your new account.
-                                   2% Commission percentage of the amount of each deposit and  withdrawal.""");
+                                   A bonus of 950 euros from our bank to your new account.
+                                   2% Commission percentage of the amount of withdrawal.""");
+                System.out.println("");
             }
             case 3 -> {
                 System.out.println("");
                 sleeping(1000);
-                System.out.println("""
+                System.out.print("""
                                    The type of owners of a Elderly bank account:
                                    A bonus of 1500 euros from our bank to your new account.
-                                   1% Commission percentage of the amount of each deposit and  withdrawal.""");
+                                   1% Commission percentage of the amount of withdrawal.""");
+                System.out.println("");
             }
+            case 4 -> {
+                System.out.println("");
+                sleeping(1000);
+                System.out.print("Before create account please read accoun types wich availabe for you to choose.");
+                System.out.println("");
+            }
+//            case 5 -> {
+//                System.out.println("");
+//                sleeping(1500);
+//                System.out.println("Not correct structure of the file - the file length is more than 9.");
+//            }
         }
     }
     

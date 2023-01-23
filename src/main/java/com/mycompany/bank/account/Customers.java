@@ -10,6 +10,7 @@ package com.mycompany.bank.account;
  */
 public class Customers {
     String personalId;
+    String accountType;
     String firstName;
     String lastName;
     String gender;
@@ -20,6 +21,7 @@ public class Customers {
 
     public Customers(
             String personalId,
+            String accountType,
             String firstName,
             String lastName,
             String gender,
@@ -30,6 +32,7 @@ public class Customers {
     )
     {
         this.personalId = personalId;
+        this.accountType = accountType;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
