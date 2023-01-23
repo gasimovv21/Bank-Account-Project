@@ -1,4 +1,4 @@
-# 💰 Bank Account 🏦 (Java)
+# 💰 EG Bank 🏦 (Java)
 >This is a simple program written in Java that simulates a bank account 💳. The program includes various functionalities such as:
 
 1) Main menu
@@ -52,6 +52,16 @@ The program has several menus with various options:
 - Load data: Allows the user to load data from a file
 - Download data to txt: Allows the user to download account data to a text file
 - Quit: Exits the program
+> Registration section:
+- Account type: Allows the user to select Bank Account type
+- Bank account types: Normal bank account. Student bank account. Elderly bank account.
+- First name: Allows the user to enter their first name
+- Last name: Allows the user to enter their last name
+- Gender: Allows the user to enter their gender
+- Age: Allows the user to enter their age
+- Address: Allows the user to enter their address 
+- Username: Allows the user to enter their username
+- Password: Allows the user to enter their password 
 > Account menu:
 - Withdraw: Allows the user to withdraw money from their account
 - Deposit: Allows the user to deposit money into their account
@@ -72,7 +82,11 @@ The program has several menus with various options:
 - Username: Allows the user to change their username
 - Password: Allows the user to change their password
 - Go back: Returns the user to the account settings menu
-⚠️ Note
+
+> ⚙️ Usage of Load data button:
+
+
+> ⚠️ Note :
 This program is for educational purposes only and should not be used for real financial transactions. 💳💰💸💴
 
 # 🎓 Project by Eltun Gasimov 
