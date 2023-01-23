@@ -7,6 +7,15 @@
    - Load data
    - Download data to TXT
    - Quit
+2) Registration section
+   - Account type: Normal, Student, Elderly
+   - First name
+   - Last name
+   - Gender
+   - Age
+   - Address
+   - Username
+   - Password
 2) Account menu
     - Withdraw
     - Deposit
@@ -27,6 +36,7 @@
     - Username
     - Password
     - Go back
+
 >🚀 Getting Started
 To get started, clone or download the repository and run the main class. You will be prompted to enter the main menu.
 
