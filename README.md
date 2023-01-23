@@ -84,7 +84,31 @@ The program has several menus with various options:
 - Go back: Returns the user to the account settings menu
 
 > ⚙️ Usage of Load data button:
+- Create: customer_data.txt file
+- Correct Location: /src/main/java/com/mycompany/bank/account/customer_data.txt
+- Correct structure of lines in file: 
+- 1) ID
+- 2) Account type: Normal, Student, Elderly
+- 3) First name
+- 4) Last name
+- 5) Gender
+- 6) Age
+- 7) Address
+- 8) Username
+- 9) Password
 
+> ℹ️ Bank Account types and privileges:
+- 1) The type of owners of a Normal bank account:
+  - 1) A bonus of 500 euros from our bank to your new account.
+  - 2) 3% Commission percentage of the amount of withdrawal.
+
+- 2) The type of owners of a Student bank account:
+  - 1) A bonus of 950 euros from our bank to your new account.
+  - 2) 2% Commission percentage of the amount of withdrawal.
+
+- 3) The type of owners of a Elderly bank account:
+  - 1) A bonus of 1500 euros from our bank to your new account.
+  - 2) 1% Commission percentage of the amount of withdrawal.
 
 > ⚠️ Note :
 This program is for educational purposes only and should not be used for real financial transactions. 💳💰💸💴
